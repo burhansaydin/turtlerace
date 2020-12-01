@@ -19,16 +19,24 @@ for i in range(0, 6):
     tim.goto(-240, y)
     y += 50
     turtles.append(tim)
-
+    x=0
 while is_on:
     for turtle in turtles:
         nums=[0, 5, 10]
         random_num = random.choice(nums)
         turtle.forward(random_num)
+
         if turtle.xcor()>230:
-            is_on= False
-            if user_guess==turtle.pencolor():
-                print(f"You win. Winner is {turtle.pencolor()} turtle.")
+            x += 1
+            turtles.remove(turtle)
+            if user_guess == turtle.pencolor() and len(turtles) == 5:
+                print(f"You win... {x}. {turtle.pencolor()} turtle.")
+                is_on=False
+            elif user_guess == turtle.pencolor() and len(turtles) != 5:
+                print(f" {x}. {turtle.pencolor()} turtle.")
+                is_on=False
+            elif user_guess != turtle.pencolor() and len(turtles) != 5:
+                print(f" {x}. {turtle.pencolor()} turtle.")
             else:
                 print(f"You lose. Winner is {turtle.pencolor()} turtle.")
 
